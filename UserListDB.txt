@@ -1,0 +1,10 @@
+ user1@example.com P@ssw0rd1
+ user2@example.com SecurePass2
+ user3@example.com RandoM#123
+ user4@example.com GenPass456
+ user5@example.com AIgenPass!
+ user6@example.com P@ss123word
+ user7@example.com Secret$789
+ user8@example.com MyPassw0rd
+ user9@example.com Rand0mPass
+ user10@example.com SecureAI#
