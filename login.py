@@ -12,47 +12,49 @@ def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
     return conn
-
+ 
 app.config['SECRET_KEY'] = 'giordano12345'
 @app.route("/", methods= ["POST", "GET"])#route is the page/link opened on browser, post/get protocol which brower and python will comunicate (sent and receive data)
-
 def createAccount():
-
-      username = request.form["sigName"]
-      email = request.form["signEmail"]
-      password = request.form["signPassword"]
-      if not username and not email and not password:
-            loginUser()
+      if(request.method =="POST"):
+            username = request.form.get("signName")
+            email = request.form.get("signEmail")
+            passwords = request.form.get("signPassword")
+            if not username and not email and not passwords:
+                  email = request.form.get("loginEmail")
+                  passwords = request.form.get("loginPassword")
+                  conn = get_db_connection()
+                  user = conn.execute('SELECT * FROM users WHERE id = ?',
+                        (1,)).fetchone() 
+                  conn.close()
+                  if user is None:
+                        abort(404)
+                        
+                  return render_template("results.html", res = user)
+            else:
+                  connectio = get_db_connection()
+                  users = connectio.execute('INSERT INTO users (username, email, passwords) VALUES (?, ?,?)', (username, email, passwords))
+                  connectio.commit()
+                  connectio.close()
+                  connectio.close()
+                  if users is None:
+                        abort(404)
+                  flash("user created")
+                  return render_template("input.html", res ="User Created")
+      
       else:
-            connectio = get_db_connection()
-            users = connectio.execute('INSERT INTO posts (username, email, password) VALUES (?, ?,?)', (username, email, password))
-            connectio.commit()
-            connectio.close()
-            connectio.close()
-            if users is None:
-                  abort(404)
-
-            flash("user created")
-
+            return render_template("input.html", res = "not post")
+            abort(404)
 
 def loginUser():
-
       if(request.method =="POST"):
-            email = request.form["loginEmail"]
-            password = request.form["loginPassword"]
-
-            
-            # while(v!=""):
-            #       l = v.split(" ")
-            #       if(var1==l[0] and var2 ==l[1]):
-            #             # return redirect(url_for("loggedMethod", username = users[0]["email"]))
-            #             return render_template("results.html", username = users[0]["email"])
-                  
-            #       v = reader.readline().strip()
-            # # flash('Title is required!')      
-            # return render_template("input.html", inv = "try again")
+            email = request.form.get("loginEmail")
+            passwords = request.form.get("loginPassword")
+            return render_template("input.html", res = "try again")
+            # return redirect(url_for("loggedMethod", username = users[0]["email"]))
+            #             return render_template("results.html", username = users[0]["email"])    
       else:
-            return render_template("input.html", res =request.method)
+            return render_template("results.html", res =" login not post")
             
 # @app.route("/logged/<username>")
 # def loggedMethod(username): 
