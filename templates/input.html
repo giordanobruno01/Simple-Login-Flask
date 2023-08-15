@@ -23,16 +23,16 @@
             <input type="password" placeholder="password" name="loginPassword">
             <input type="submit" value="Click">
         </form>
-       
-        {% with messages=get_flashed_messages(with_categories=true) %}
-        {% for category, message in messages %}
-        <div class='alert alert-{{category}} text-center alert-dismissible fade show m-auto' style="background-color: blue;">
-            {{ message }}
-        </div>
-        {% endfor %}
-        {% endwith %}
-
     </div>
+    
+    {% with messages=get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+    <div class='alert alert-{{category}} text-center alert-dismissible fade show m-auto'
+        style="background-color: pink;">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endwith %}
 </body>
 
 </html>

@@ -28,23 +28,27 @@ def createAccount():
                   user = conn.execute('SELECT * FROM users WHERE email = ? AND passwords = ?', (email, passwords)).fetchone() 
                   conn.close()
                   if user is None: 
-                        abort(404)
-                        
-                  return render_template("results.html", res = user["username"])
+                        flash("User Does Not Exists", 'your bootstrap category[eg:success, primary, etc]')
+                        return render_template("input.html" )
+                        # abort(404)
+                  return render_template("results.html", res = user["username"] + " Welcome")
             else: 
 
                   connectio = get_db_connection()
                   user = connectio.execute('SELECT * FROM users WHERE email = ? AND passwords = ?', (email, passwords)).fetchone() 
                   # connectio.close()
                   if user is None: 
-                  
+            
                         users = connectio.execute('INSERT INTO users (username, email, passwords) VALUES (?, ?,?)', (username, email, passwords))
                         connectio.commit()
                         connectio.close()
                   
-                        flash("user created", 'your bootstrap category[eg:success, primary, etc]')
-                        return render_template("input.html")
-                  else
+                        flash("User Created", 'your bootstrap category[eg:success, primary, etc]')
+                        return render_template("input.html" , )
+                  else:
+                        flash("User Already Exists", 'your bootstrap category[eg:success, primary, etc]')
+                        return render_template("input.html" )
+
       else:
             return render_template("input.html" )
             abort(404)
