@@ -21,40 +21,43 @@ def createAccount():
             email = request.form.get("signEmail")
             passwords = request.form.get("signPassword")
             if not username and not email and not passwords:
+
                   email = request.form.get("loginEmail")
                   passwords = request.form.get("loginPassword")
                   conn = get_db_connection()
-                  user = conn.execute('SELECT * FROM users WHERE id = ?',
-                        (1,)).fetchone() 
+                  user = conn.execute('SELECT * FROM users WHERE email = ? AND passwords = ?', (email, passwords)).fetchone() 
                   conn.close()
-                  if user is None:
+                  if user is None: 
                         abort(404)
                         
-                  return render_template("results.html", res = user)
-            else:
+                  return render_template("results.html", res = user["username"])
+            else: 
+
                   connectio = get_db_connection()
-                  users = connectio.execute('INSERT INTO users (username, email, passwords) VALUES (?, ?,?)', (username, email, passwords))
-                  connectio.commit()
-                  connectio.close()
-                  connectio.close()
-                  if users is None:
-                        abort(404)
-                  flash("user created")
-                  return render_template("input.html", res ="User Created")
-      
+                  user = connectio.execute('SELECT * FROM users WHERE email = ? AND passwords = ?', (email, passwords)).fetchone() 
+                  # connectio.close()
+                  if user is None: 
+                  
+                        users = connectio.execute('INSERT INTO users (username, email, passwords) VALUES (?, ?,?)', (username, email, passwords))
+                        connectio.commit()
+                        connectio.close()
+                  
+                        flash("user created", 'your bootstrap category[eg:success, primary, etc]')
+                        return render_template("input.html")
+                  else
       else:
-            return render_template("input.html", res = "not post")
+            return render_template("input.html" )
             abort(404)
 
-def loginUser():
-      if(request.method =="POST"):
-            email = request.form.get("loginEmail")
-            passwords = request.form.get("loginPassword")
-            return render_template("input.html", res = "try again")
-            # return redirect(url_for("loggedMethod", username = users[0]["email"]))
-            #             return render_template("results.html", username = users[0]["email"])    
-      else:
-            return render_template("results.html", res =" login not post")
+# def loginUser():
+#       if(request.method =="POST"):
+#             email = request.form.get("loginEmail")
+#             passwords = request.form.get("loginPassword")
+#             return render_template("input.html", res = "try again")
+#             # return redirect(url_for("loggedMethod", username = users[0]["email"]))
+#             #             return render_template("results.html", username = users[0]["email"])    
+#       else:
+#             return render_template("results.html", res =" login not post")
             
 # @app.route("/logged/<username>")
 # def loggedMethod(username): 

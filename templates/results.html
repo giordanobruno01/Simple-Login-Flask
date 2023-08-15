@@ -10,9 +10,13 @@
 <body>
     <div
         style="display: block; border: 1px solid black; width: 500px; height: 500px; margin-left: auto; margin-right: auto;">
-        <form  method="post">
-            <p>{{res['email']}} is Logged</p>
-         
+        <form method="post">
+
+            <p>{{res}}</p>
+            <!-- <p>{{res}} is Logged</p>
+            {% for i in res %}
+            <p>{{i}}</p>
+            {% endfor %} -->
             <!-- {% block content %}
             
             {% for i in emails %}

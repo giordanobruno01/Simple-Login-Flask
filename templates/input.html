@@ -9,22 +9,28 @@
 
 <body>
     <div style="display: block; border: 1px solid black; width: 500px; height: 500px;  float:left; margin-left: 10%;">
-        <form action="#" method="post">
-            <input type="text" placeholder="username" name="signName" >
+        <form method="post">
+            <input type="text" placeholder="username" name="signName">
             <input type="email" placeholder="email" name="signEmail">
             <input type="password" placeholder="password" name="signPassword">
             <input type="submit" value="Click">
         </form>
     </div>
 
-    <div
-        style="display: block; border: 1px solid black; width: 500px; height: 500px;  float:right; margin-right: 10%;">
-       <form method="post">
-        <input type="email" placeholder="email" name="loginEmail">
-        <input type="password" placeholder="password" name="loginPassword">
-        <input type="submit" value="Click">
-    </form>
-    <p>{{res}}</p>
+    <div style="display: block; border: 1px solid black; width: 500px; height: 500px;  float:right; margin-right: 10%;">
+        <form method="post">
+            <input type="email" placeholder="email" name="loginEmail">
+            <input type="password" placeholder="password" name="loginPassword">
+            <input type="submit" value="Click">
+        </form>
+       
+        {% with messages=get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+        <div class='alert alert-{{category}} text-center alert-dismissible fade show m-auto' style="background-color: blue;">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endwith %}
 
     </div>
 </body>
