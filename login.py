@@ -8,7 +8,7 @@ import sqlite3
 # Install Flask: pip3 install Flask
 
 app = Flask("login")#creating the flask obj (application) with the .py
-def get_db_connection():
+def get_db_connection(): 
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
     return conn
@@ -28,8 +28,8 @@ def createAccount():
                   user = conn.execute('SELECT * FROM users WHERE email = ? AND passwords = ?', (email, passwords)).fetchone() 
                   conn.close()
                   if user is None: 
-                        flash("User Does Not Exists", 'your bootstrap category[eg:success, primary, etc]')
-                        return render_template("input.html" )
+                        # flash("User Does Not Exists", 'your bootstrap category[eg:success, primary, etc]')
+                        return render_template("input.html" , message = "User does not Exists")
                         # abort(404)
                   return render_template("results.html", res = user["username"] + " Welcome")
             else: 
@@ -37,17 +37,17 @@ def createAccount():
                   connectio = get_db_connection()
                   user = connectio.execute('SELECT * FROM users WHERE email = ? AND passwords = ?', (email, passwords)).fetchone() 
                   # connectio.close()
-                  if user is None: 
+                  if user is None:  
             
                         users = connectio.execute('INSERT INTO users (username, email, passwords) VALUES (?, ?,?)', (username, email, passwords))
                         connectio.commit()
                         connectio.close()
                   
-                        flash("User Created", 'your bootstrap category[eg:success, primary, etc]')
-                        return render_template("input.html" , )
+                        # flash("User Created", 'your bootstrap category[eg:success, primary, etc]')
+                        return render_template("input.html" , message = "User Created" )
                   else:
-                        flash("User Already Exists", 'your bootstrap category[eg:success, primary, etc]')
-                        return render_template("input.html" )
+                         
+                        return render_template("input.html", message = "User Already Exists" )
 
       else:
             return render_template("input.html" )

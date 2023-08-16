@@ -4,11 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auth</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <title>Auth Page</title>
 </head>
 
 <body>
-    <div style="display: block; border: 1px solid black; width: 500px; height: 500px;  float:left; margin-left: 10%;">
+
+    <div class="box">
         <form method="post">
             <input type="text" placeholder="username" name="signName">
             <input type="email" placeholder="email" name="signEmail">
@@ -17,22 +19,15 @@
         </form>
     </div>
 
-    <div style="display: block; border: 1px solid black; width: 500px; height: 500px;  float:right; margin-right: 10%;">
+    <div class="box">
         <form method="post">
             <input type="email" placeholder="email" name="loginEmail">
             <input type="password" placeholder="password" name="loginPassword">
             <input type="submit" value="Click">
         </form>
     </div>
-    
-    {% with messages=get_flashed_messages(with_categories=true) %}
-    {% for category, message in messages %}
-    <div class='alert alert-{{category}} text-center alert-dismissible fade show m-auto'
-        style="background-color: pink;">
-        {{ message }}
-    </div>
-    {% endfor %}
-    {% endwith %}
+    <p>{{ message }}</p>
+
 </body>
 
 </html>
