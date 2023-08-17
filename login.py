@@ -24,14 +24,15 @@ def createAccount():
 
                   email = request.form.get("loginEmail")
                   passwords = request.form.get("loginPassword")
+
                   conn = get_db_connection()
                   user = conn.execute('SELECT * FROM users WHERE email = ? AND passwords = ?', (email, passwords)).fetchone() 
                   conn.close()
                   if user is None: 
-                        # flash("User Does Not Exists", 'your bootstrap category[eg:success, primary, etc]')
+                  
                         return render_template("input.html" , message = "User does not Exists")
                         # abort(404)
-                  return render_template("results.html", res = user["username"] + " Welcome")
+                  return redirect(url_for("shopMethod", name =user["username"]) )
             else: 
 
                   connectio = get_db_connection()
@@ -53,20 +54,17 @@ def createAccount():
             return render_template("input.html" )
             abort(404)
 
-# def loginUser():
-#       if(request.method =="POST"):
-#             email = request.form.get("loginEmail")
-#             passwords = request.form.get("loginPassword")
-#             return render_template("input.html", res = "try again")
-#             # return redirect(url_for("loggedMethod", username = users[0]["email"]))
-#             #             return render_template("results.html", username = users[0]["email"])    
-#       else:
-#             return render_template("results.html", res =" login not post")
-            
-# @app.route("/logged/<username>")
-# def loggedMethod(username): 
-#       return render_template("results.html", res = username + " logged " )
+@app.route("/shop/<name>", methods = ["GET", "POST"])
+def shopMethod(name):
+      if(request.method == "POST"):
+            chocolate = request.form.get("chocolate")
+            soda = request.form.get("soda")
+            banana = request.form.get("banana")
+            pizza = request.form.get("pizza")
 
+            return render_template("checkout.html", res = chocolate )
+      else:
+            return render_template("shop.html")
 # @app.route("/<username>")
 # def lgi(username):
 #       return render_template("results.html", res = username + " logged with url " )

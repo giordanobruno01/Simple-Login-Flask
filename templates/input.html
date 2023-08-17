@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
@@ -9,8 +9,10 @@
 </head>
 
 <body>
+    <h1>Welcome to the Groceries Shop</h1>
 
-    <div class="box">
+    <div class="box1">
+        <h3>Sign Up</h3>
         <form method="post">
             <input type="text" placeholder="username" name="signName">
             <input type="email" placeholder="email" name="signEmail">
@@ -19,14 +21,16 @@
         </form>
     </div>
 
-    <div class="box">
+    <div class="box2">
+        <h3>Log in</h3>
         <form method="post">
             <input type="email" placeholder="email" name="loginEmail">
             <input type="password" placeholder="password" name="loginPassword">
             <input type="submit" value="Click">
         </form>
+        <p>{{ message }}</p>
     </div>
-    <p>{{ message }}</p>
+    
 
 </body>
 
