@@ -2,21 +2,21 @@
   border: 1px solid black;
 } */
 .box1 {
-  display: inline-block;
+  display: block;
   border: 1px solid black;
-  width: 500px;
-  height: 500px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 48vw;
+  height: 50vh;
+  float: left;
+  
   
 }
 .box2{
-  display: inline-block;
+ display: block;
   border: 1px solid black;
-  width: 500px;
-  height: 500px;
-  margin-left:auto;
-  margin-right: auto;
+  width: 48vw;
+  height: 50vh;
+  float: right;
+  
   
 }
 
