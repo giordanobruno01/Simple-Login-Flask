@@ -7,30 +7,44 @@
   width: 48vw;
   height: 50vh;
   float: left;
-  
-  
 }
-.box2{
- display: block;
+.box2 {
+  display: block;
   border: 1px solid black;
   width: 48vw;
   height: 50vh;
   float: right;
-  
-  
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-  
-h1{
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+h1 {
   text-align: center;
 }
-h3{
+h3 {
   text-align: center;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }
 form {
   margin-left: auto;
   margin-right: auto;
   width: 500px;
   text-align: center;
-  
 }

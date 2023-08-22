@@ -57,12 +57,14 @@ def createAccount():
 @app.route("/shop/<name>", methods = ["GET", "POST"])
 def shopMethod(name):
       if(request.method == "POST"):
-            chocolate = request.form.get("chocolate")
-            soda = request.form.get("soda")
-            banana = request.form.get("banana")
-            pizza = request.form.get("pizza")
+            chocolate = int(request.form.get("chocolate"))
+            soda = int(request.form.get("soda"))
+            banana = int(request.form.get("banana"))
+            pizza = int(request.form.get("pizza"))
 
-            return render_template("checkout.html", res = chocolate )
+            total = chocolate + soda + banana + pizza
+
+            return render_template("checkout.html", res = total,cust = name, chocoQ = chocolate, sodaQ = soda//2, bananaQ = banana//3, pizzaQ = pizza//4)
       else:
             return render_template("shop.html")
 # @app.route("/<username>")

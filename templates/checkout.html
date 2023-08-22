@@ -1,17 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
-    <title>Logged Page</title>
+    <title>Checkout</title>
 </head>
 
 <body>
-    <div style="display: block; border: 1px solid black; width: 500px; height: 500px; margin-left: auto; margin-right: auto; margin-top: 100px; ">
-        
-<p>{{res}}</p>
+    <div
+        style="display: block; border: 1px solid black; width: 500px; height: 500px; margin-left: auto; margin-right: auto; margin-top: 100px;">
+        <h1 style="margin-top: 60px; animation: blinker 1.5s linear infinite;
+                color: red;
+                font-family: sans-serif;">Hi {{cust}}</h1>
+        <table>
+
+            <tr>
+                <th>Item</th>
+                <th>Quant</th>
+                <th>Amount</th>
+            </tr>
+            {% if chocoQ!=0 %}
+            <tr>
+                <td>Chocolate</td>
+                <td>{{chocoQ}}</td>
+                <td>{{chocoQ}}$</td>
+            </tr>
+            {% endif %}
+            {% if sodaQ!=0 %}
+            <tr>
+                <td>Soda</td>
+                <td>{{sodaQ}}</td>
+                <td>{{sodaQ*2}}$</td>
+            </tr>
+            {% endif %}
+            {% if bananaQ!=0 %}
+
+            <tr>
+                <td>Banana</td>
+                <td>{{bananaQ}}</td>
+                <td>{{bananaQ*3}}$</td>
+            </tr>
+            {% endif %}
+            {% if pizzaQ!=0 %}
+            <tr>
+                <td>Pizza</td>
+                <td>{{pizzaQ}}</td>
+                <td>{{pizzaQ*4}}$</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td>Total</td>
+                <td> </td>
+                <td>{{res}}$</td>
+            </tr>
+        </table>
+        <h3>Thanks for shopping!</h3>
+
+
     </div>
 </body>
 
