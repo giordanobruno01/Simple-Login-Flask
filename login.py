@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, url_for, redirect, flash
+from flask_login import login_required, current_user,LoginManager
+
 from werkzeug.exceptions import abort
 import sqlite3
 
@@ -55,6 +57,7 @@ def createAccount():
             abort(404)
 
 @app.route("/shop/<name>", methods = ["GET", "POST"])
+
 def shopMethod(name):
       if(request.method == "POST"):
             chocolate = int(request.form.get("chocolate"))
